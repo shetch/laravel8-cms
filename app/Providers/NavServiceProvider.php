@@ -4,26 +4,27 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Schema;
 
-class AppServiceProvider extends ServiceProvider
+class NavServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
-        //
+        
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
+        // NavComposer
+        View::composer(['*'], 'App\Core\Composers\NavComposer');
     }
 }
