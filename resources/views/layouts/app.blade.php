@@ -21,29 +21,42 @@
 
     @livewireStyles
 
+
+
+
+
+
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Offcanvas navbar</a>
+    <a class="navbar-brand" href="/">ukado</a>
     <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        @foreach($navs as $nav)
+
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+          <a class="nav-link" href="http://127.0.0.1:8000/page/{{ $nav->slug }}">{{ $nav->title }}</a>
         </li>
+
+        @endforeach
+        
         <li class="nav-item">
-          <a class="nav-link" href="#">Notifications</a>
+          <a class="nav-link" href="/services">Services</a>
         </li>
+        
+        
+          
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link active" aria-current="page" href="">Page</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Switch account</a>
-        </li>
+          
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
@@ -51,7 +64,12 @@
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
+        </li> 
+
+
+      </ul>
+      <!-- Right Side Of Navbar -->
+      <ul class="navbar-nav ml-auto">
 
         <!-- Authentication Links -->
         @guest
@@ -68,11 +86,8 @@
             @endif
         @else
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }}
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -82,20 +97,24 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-                </div>
-            </li>
+              </ul>
+            </li> 
         @endguest
 
+      <li class="nav-item ms-1">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+      </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+
     </div>
   </div>
 </nav>
 
-<main class="py-4">
+<main class="mt-5">
     @yield('content')
 </main>
 

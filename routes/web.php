@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/page/{id}', [App\Http\Controllers\PageController::class, 'index']);
+
+
+//Route::get('/services', [App\Http\Controllers\ServiceController::class, 'index'])->middleware('auth');
+//Route::resource('services', ServiceController::class)->middleware('auth');
+
+Route::resource('services', '\App\Http\Controllers\ServiceController');

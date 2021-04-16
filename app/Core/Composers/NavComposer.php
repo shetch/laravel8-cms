@@ -23,9 +23,15 @@ class NavComposer
     public function compose(View $view)
     {
         
-        $pages = DB::table('pages')->where('active', '1')->get();
+        $navigation = '';
+        
+        $navs = DB::table('pages')->where('active', '1')->get();
 
-        $view->with('pages', $pages);
+        foreach ($navs as $nav) {
+            $navigation .= '<li class="nav-item"><a class="nav-link" href="page/'.$nav->slug.'">'.$nav->title.'</a></li>';
+        }
+
+        $view->with('navigation', $navigation);
         
     }
 }

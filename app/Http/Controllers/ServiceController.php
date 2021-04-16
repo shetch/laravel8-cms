@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Pages;
+use App\Models\Service;
 
-class PageController extends Controller
+class ServiceController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +29,10 @@ class PageController extends Controller
      */
     public function index()
     {
-        //$pages = DB::table('pages')->where('active', '1')->get();
-        //return view('page')->with(['pages' => $pages]);
-        return view('page');
+        $services = DB::table('Services')->get();
+        //$services = DB::table('Service')->where('active', '1')->get();
+        dd($services);
+        return view('services')->with(['services' => $services]);
     }
 
     /**
